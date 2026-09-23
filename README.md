@@ -11,8 +11,13 @@ python -m venv .venv
 
 ## Run
 
+A simple command-line to-do list.
+
 ```
-.venv\Scripts\python.exe main.py
+.venv\Scripts\python.exe main.py add "Buy milk"
+.venv\Scripts\python.exe main.py list
+.venv\Scripts\python.exe main.py done 0
+.venv\Scripts\python.exe main.py remove 0
 ```
 
 ## Test
