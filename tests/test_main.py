@@ -27,3 +27,18 @@ def test_format_tasks_with_items():
     output = format_tasks(tasks)
     assert "[ ] 0: Buy milk" in output
     assert "[x] 1: Walk dog" in output
+
+
+def test_main_rejects_missing_task_number(tmp_path, monkeypatch, capsys):
+    import main
+
+    monkeypatch.setattr(main, "TASKS_FILE", tmp_path / "tasks.json")
+    for command in ("done", "remove"):
+        for index in ("0", "-1"):
+            try:
+                main.main([command, index])
+            except SystemExit as exc:
+                assert exc.code == 1
+            else:
+                raise AssertionError("expected SystemExit")
+            assert "No task with number" in capsys.readouterr().err

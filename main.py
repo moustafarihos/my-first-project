@@ -62,7 +62,11 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> None:
     parser = build_parser()
     args = parser.parse_args(argv)
-    tasks = load_tasks()
+    tasks = load_tasks(TASKS_FILE)
+
+    if args.command in ("done", "remove") and not 0 <= args.index < len(tasks):
+        print(f"No task with number {args.index}. Use 'list' to see your tasks.", file=sys.stderr)
+        sys.exit(1)
 
     if args.command == "add":
         add_task(tasks, args.text)
