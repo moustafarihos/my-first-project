@@ -3,3 +3,4 @@ __pycache__/
 .venv/
 .pytest_cache/
 tasks.json
+options_bot/state.json
